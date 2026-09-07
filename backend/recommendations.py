@@ -141,3 +141,13 @@ def get_recommendations(missing_skills):
         if recommendation:
             recommendations.append(recommendation)
     return recommendations
+
+
+def get_recommendation(skill):
+    recommendation = next(
+        (value for key, value in RECOMMENDATIONS.items() if key.lower() == skill.lower()),
+        None,
+    )
+    if recommendation:
+        return recommendation
+    return f"Build a focused project that demonstrates {skill} in a job-relevant scenario."
