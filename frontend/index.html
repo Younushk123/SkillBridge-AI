@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillBridge AI — Career Intelligence</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-top">
+
+            <!-- Brand -->
+            <div class="brand">
+                <div class="brand-text">
+                    <div class="brand-name">
+                        SkillBridge <span>AI</span>
+                    </div>
+
+                    <div class="brand-caption">
+                        Career intelligence platform
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Navigation -->
+            <div class="nav-section">
+
+                <div class="nav-label">
+                    WORKSPACE
+                </div>
+
+                <button class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </button>
+
+                <button class="nav-item" data-page="resume">
+                    <span class="nav-icon">▣</span>
+                    <span>Resume Analysis</span>
+                </button>
+
+                <button class="nav-item" data-page="skill-gap">
+                    <span class="nav-icon">◈</span>
+                    <span>Skill Gap</span>
+                </button>
+
+                <button class="nav-item" data-page="job-matching">
+                    <span class="nav-icon">◎</span>
+                    <span>Job Matching</span>
+                </button>
+
+                <button class="nav-item" data-page="roadmap">
+                    <span class="nav-icon">↗</span>
+                    <span>Career Roadmap</span>
+                </button>
+
+                <button class="nav-item" data-page="market">
+                    <span class="nav-icon">◌</span>
+                    <span>Market Insights</span>
+                </button>
+
+                <button class="nav-item" data-page="interview">
+                    <span class="nav-icon">◇</span>
+                    <span>Interview Coach</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sidebar Profile -->
+
+        <div class="sidebar-profile">
+
+            <div class="nav-label">
+                PROFILE
+            </div>
+
+            <div class="sidebar-profile-card">
+
+                <div class="profile-avatar" id="sidebarAvatar">
+                    Y
+                </div>
+
+                <div class="sidebar-profile-info">
+
+                    <div
+                        class="sidebar-profile-name"
+                        id="sidebarProfileName"
+                    >
+                        Your Profile
+                    </div>
+
+                    <div
+                        class="sidebar-profile-role"
+                        id="sidebarProfileRole"
+                    >
+                        No profile selected
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <div class="mobile-brand">
+                    <span>
+                        SkillBridge <strong>AI</strong>
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    AI System Ready
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= PAGE CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section
+                class="page active"
+                id="page-dashboard"
+            >
+
+                <!-- Hero -->
+
+                <section class="hero">
+
+                    <div class="hero-brand">
+
+                        <div>
+
+                            <div class="hero-brand-name">
+                                SkillBridge <span>AI</span>
+                            </div>
+
+                            <div class="hero-brand-subtitle">
+                                AI-Powered Career Intelligence
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-content">
+
+                        <div class="eyebrow">
+                            CAREER INTELLIGENCE
+                        </div>
+
+                        <h1>
+                            Your Career, Smarter.
+                        </h1>
+
+                        <p>
+                            Understand your skills, identify what you're
+                            missing, analyze the job market, and build a
+                            personalized career path powered by AI.
+                        </p>
+
+
+                        <div class="hero-actions">
+
+                            <button
+                                class="primary-button"
+                                data-page-action="resume"
+                            >
+                                Analyze Your Resume
+                                <span>→</span>
+                            </button>
+
+                            <button
+                                class="secondary-button"
+                                data-page-action="profile"
+                            >
+                                Create Profile
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= METRICS ================= -->
+
+                <div class="metrics-grid">
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <span>Your Skills</span>
+                            <span class="metric-icon">◇</span>
+                        </div>
+
+                        <div
+                            class="metric-value"
+                            id="metricSkills"
+                        >
+                            0
+                        </div>
+
+                        <div class="metric-description">
+                            Skills identified
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <span>Skill Gaps</span>
+                            <span class="metric-icon">△</span>
+                        </div>
+
+                        <div
+                            class="metric-value"
+                            id="metricGaps"
+                        >
+                            0
+                        </div>
+
+                        <div class="metric-description">
+                            Skills to develop
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <span>Target Role</span>
+                            <span class="metric-icon">◎</span>
+                        </div>
+
+                        <div
+                            class="metric-value metric-role"
+                            id="metricRole"
+                        >
+                            —
+                        </div>
+
+                        <div class="metric-description">
+                            Career direction
+                        </div>
+
+                    </div>
+
+
+                    <div class="metric-card">
+
+                        <div class="metric-top">
+                            <span>Jobs Analyzed</span>
+                            <span class="metric-icon">↗</span>
+                        </div>
+
+                        <div
+                            class="metric-value"
+                            id="metricJobs"
+                        >
+                            0
+                        </div>
+
+                        <div class="metric-description">
+                            Market opportunities
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= WORKSPACE ================= -->
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            WORKSPACE
+                        </div>
+
+                        <h2>
+                            Career Intelligence
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Turn your profile into actionable career insights.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <!-- Skill Gap -->
+
+                    <div
+                        class="feature-card"
+                        data-page-action="skill-gap"
+                    >
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        <div class="feature-content">
+
+                            <h3>
+                                Skill Gap Analysis
+                            </h3>
+
+                            <p>
+                                Compare your current skills against the
+                                requirements of your target career.
+                            </p>
+
+                            <span class="feature-link">
+                                Explore skill gaps →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Market -->
+
+                    <div
+                        class="feature-card"
+                        data-page-action="market"
+                    >
+
+                        <div class="feature-icon">
+                            ◌
+                        </div>
+
+                        <div class="feature-content">
+
+                            <h3>
+                                Market Intelligence
+                            </h3>
+
+                            <p>
+                                Discover which skills are currently
+                                demanded by the job market.
+                            </p>
+
+                            <span class="feature-link">
+                                Analyze market →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Job Matching -->
+
+                    <div
+                        class="feature-card"
+                        data-page-action="job-matching"
+                    >
+
+                        <div class="feature-icon">
+                            ◎
+                        </div>
+
+                        <div class="feature-content">
+
+                            <h3>
+                                Job Matching
+                            </h3>
+
+                            <p>
+                                Match your profile against real job
+                                requirements and identify your fit.
+                            </p>
+
+                            <span class="feature-link">
+                                Match jobs →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= PROFILE OVERVIEW ================= -->
+
+                <div class="section-heading profile-heading">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            PROFILE
+                        </div>
+
+                        <h2>
+                            Your Career Profile
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-overview">
+
+                    <div class="profile-main">
+
+                        <div
+                            class="large-avatar"
+                            id="profileAvatar"
+                        >
+                            Y
+                        </div>
+
+                        <div>
+
+                            <h3 id="profileName">
+                                Welcome to SkillBridge
+                            </h3>
+
+                            <p id="profileEducation">
+                                Create your profile to get started.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-details">
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Target Role
+                            </span>
+
+                            <strong id="profileRole">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="profile-detail">
+
+                            <span>
+                                Experience
+                            </span>
+
+                            <strong id="profileExperience">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SKILLS ================= -->
+
+                <div class="skills-section">
+
+                    <div class="section-heading compact">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                CAPABILITIES
+                            </div>
+
+                            <h2>
+                                Current Skills
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="skills-container"
+                        id="dashboardSkills"
+                    >
+
+                        <span class="empty-state">
+                            No skills added yet.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RESUME ================= -->
+
+            <section
+                class="page"
+                id="page-resume"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            RESUME INTELLIGENCE
+                        </div>
+
+                        <h1>
+                            Resume Analysis
+                        </h1>
+
+                        <p>
+                            Upload your resume and let SkillBridge AI
+                            extract your career profile automatically.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="upload-card">
+
+                    <div class="upload-icon">
+                        ↑
+                    </div>
+
+                    <h2>
+                        Upload your resume
+                    </h2>
+
+                    <p>
+                        PDF files are supported. SkillBridge will analyze
+                        your experience, education and skills.
+                    </p>
+
+
+                    <label
+                        class="upload-button"
+                        for="resumeFile"
+                    >
+                        Choose Resume
+                    </label>
+
+                    <input
+                        type="file"
+                        id="resumeFile"
+                        accept=".pdf"
+                        hidden
+                    >
+
+
+                    <div
+                        class="file-name"
+                        id="resumeFileName"
+                    >
+                        No file selected
+                    </div>
+
+
+                    <button
+                        class="primary-button"
+                        id="analyzeResumeButton"
+                    >
+                        Analyze Resume
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="resumeResults"
+                    class="results-container hidden"
+                >
+                </div>
+
+            </section>
+
+
+            <!-- ================= SKILL GAP ================= -->
+
+            <section
+                class="page"
+                id="page-skill-gap"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            SKILL INTELLIGENCE
+                        </div>
+
+                        <h1>
+                            Skill Gap Analysis
+                        </h1>
+
+                        <p>
+                            Understand exactly which skills you need to
+                            develop for your target role.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="skillGapContent">
+
+                    <div class="empty-page">
+
+                        <div class="empty-page-icon">
+                            ◈
+                        </div>
+
+                        <h2>
+                            No analysis yet
+                        </h2>
+
+                        <p>
+                            Create a profile first to analyze your skill
+                            gaps.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-page-action="profile"
+                        >
+                            Create Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= JOB MATCHING ================= -->
+
+            <section
+                class="page"
+                id="page-job-matching"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            OPPORTUNITY MATCHING
+                        </div>
+
+                        <h1>
+                            Job Matching
+                        </h1>
+
+                        <p>
+                            Compare your skills against real job
+                            requirements.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="jobMatchingContent">
+
+                    <div class="empty-page">
+
+                        <div class="empty-page-icon">
+                            ◎
+                        </div>
+
+                        <h2>
+                            Ready to find your fit?
+                        </h2>
+
+                        <p>
+                            Create a profile, paste a real job description,
+                            and analyze your compatibility.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-page-action="profile"
+                        >
+                            Create Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ROADMAP ================= -->
+
+            <section
+                class="page"
+                id="page-roadmap"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            CAREER DEVELOPMENT
+                        </div>
+
+                        <h1>
+                            Career Roadmap
+                        </h1>
+
+                        <p>
+                            Follow a personalized path from your current
+                            skills to your target career.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="roadmapContent">
+
+                    <div class="empty-page">
+
+                        <div class="empty-page-icon">
+                            ↗
+                        </div>
+
+                        <h2>
+                            Your roadmap starts here
+                        </h2>
+
+                        <p>
+                            Complete your skill analysis to generate a
+                            personalized career roadmap.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-page-action="skill-gap"
+                        >
+                            Analyze Skills
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MARKET ================= -->
+
+            <section
+                class="page"
+                id="page-market"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            REAL-TIME MARKET INTELLIGENCE
+                        </div>
+
+                        <h1>
+                            Market Insights
+                        </h1>
+
+                        <p>
+                            Discover what employers are looking for right
+                            now.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="marketContent">
+
+                    <div class="empty-page">
+
+                        <div class="empty-page-icon">
+                            ◌
+                        </div>
+
+                        <h2>
+                            Market intelligence
+                        </h2>
+
+                        <p>
+                            Create a profile to analyze current job-market
+                            demand for your target role.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-page-action="profile"
+                        >
+                            Create Profile
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= INTERVIEW ================= -->
+
+            <section
+                class="page"
+                id="page-interview"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            AI INTERVIEW COACH
+                        </div>
+
+                        <h1>
+                            Interview Preparation
+                        </h1>
+
+                        <p>
+                            Prepare for interviews using questions
+                            tailored to your career target.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="interviewContent">
+
+                    <div class="empty-page">
+
+                        <div class="empty-page-icon">
+                            ◇
+                        </div>
+
+                        <h2>
+                            Prepare with confidence
+                        </h2>
+
+                        <p>
+                            Complete job analysis to generate
+                            role-specific interview questions.
+                        </p>
+
+                        <button
+                            class="primary-button"
+                            data-page-action="job-matching"
+                        >
+                            Analyze Jobs
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE MODAL ================= -->
+
+            <div
+                class="modal-overlay hidden"
+                id="profileModal"
+            >
+
+                <div class="modal">
+
+                    <div class="modal-header">
+
+                        <div>
+
+                            <div class="eyebrow">
+                                PROFILE SETUP
+                            </div>
+
+                            <h2>
+                                Build your career profile
+                            </h2>
+
+                        </div>
+
+
+                        <button
+                            class="modal-close"
+                            id="closeProfileModal"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profileInputName"
+                                    placeholder="Your full name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="profileInputEmail"
+                                    placeholder="you@example.com"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Education
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profileInputEducation"
+                                    placeholder="BS Computer Science"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Experience Years
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="profileInputExperience"
+                                    min="0"
+                                    value="0"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Target Role
+                                </label>
+
+                                <select id="profileInputRole">
+
+                                    <option value="AI/ML Engineer">
+                                        AI/ML Engineer
+                                    </option>
+                                    <option value="Data Scientist">
+                                        Data Scientist
+                                    </option>
+
+                                    <option value="AI Engineer">
+                                        AI Engineer
+                                    </option>
+
+                                    <option value="Software Engineer">
+                                        Software Engineer
+                                    </option>
+
+                                    <option value="Web Developer">
+                                        Web Developer
+                                    </option>
+
+                                    <option value="DevOps Engineer">
+                                        DevOps Engineer
+                                    </option>
+
+                                    <option value="Cybersecurity Analyst">
+                                        Cybersecurity Analyst
+                                    </option>
+                                    <option value="Mobile App Developer">
+                                        Mobile App Developer
+                                    </option>
+                                    <option value="Game Developer">
+                                        Game Developer
+                                    </option>
+                                    <option value="Machine Learning Engineer">
+                                        Machine Learning Engineer
+                                    </option>
+                                    <option value="Cloud Solutions Architect">
+                                        Cloud Solutions Architect
+                                    </option>
+                                    <option value="Business Analyst">
+                                        Business Analyst
+                                    </option>
+                                    <option value="UI/UX Designer">
+                                        UI/UX Designer
+                                    </option>
+                                    <option value="Digital Marketing Specialist">
+                                        Digital Marketing Specialist
+                                    </option>
+                                    <option value="Blockchain Developer">
+                                        Blockchain Developer
+                                    </option>
+                                    <option value="Robotics Engineer">
+                                        Robotics Engineer
+                                    </option>
+                                    <option value="Data Engineer">
+                                        Data Engineer
+                                    </option>
+                                    <option value="AI Research Scientist">
+                                        AI Research Scientist
+                                    </option>
+                                    <option value="Embedded Systems Engineer">
+                                        Embedded Systems Engineer
+                                    </option>
+                                    <option value="Network Engineer">
+                                        Network Engineer
+                                    </option>
+                                    <option value="IT Support Specialist">
+                                        IT Support Specialist
+                                    </option>
+                                    <option value="Database Administrator">
+                                        Database Administrator
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group full">
+                                <label>Current Skills</label>
+
+                                <div class="skills-dropdown" id="skillsDropdown">
+                                    <button type="button" class="skills-dropdown-toggle" id="skillsDropdownToggle">
+                                        <span id="skillsDropdownText">Select skills</span>
+                                        <span class="skills-dropdown-arrow">▼</span>
+                                    </button>
+
+                                    <div class="skills-dropdown-menu" id="skillsDropdownMenu">
+                                    </div>
+
+                        </div>
+
+
+                        <div
+                            class="form-error hidden"
+                            id="profileFormError"
+                        >
+                        </div>
+
+
+                        <div class="modal-actions">
+
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                id="cancelProfile"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                Create Profile
+                                <span>→</span>
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TOAST ================= -->
+
+            <div
+                class="toast hidden"
+                id="toast"
+            >
+                <span id="toastMessage"></span>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- JavaScript -->
+
+<script src="./js/app.js"></script>
+
+</body>
+</html>
