@@ -3,7 +3,7 @@
 // const API_BASE_URL = window.SKILLBRIDGE_API_URL || "http://127.0.0.1:8000";
 const API_BASE_URL =
     window.SKILLBRIDGE_API_URL ||
-    "https://skillbridge-ai-zv5b.onrender.com";
+    "https://skillbridge-ai-backend-mdgs.onrender.com";
 const PROFILE_STORAGE_KEY = "skillbridge_profile_id";
 
 const state = {
