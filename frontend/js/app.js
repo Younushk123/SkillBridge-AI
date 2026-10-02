@@ -430,6 +430,13 @@ async function handleProfileSubmit(event) {
             );
         }
 
+        if (isUpdate) {
+            state.skillGap = null;
+            state.jobAnalysis = null;
+            state.marketAnalysis = null;
+            state.resumeAnalysis = null;
+        }
+
         setProfileFromApi(data);
 
         localStorage.setItem(
@@ -493,49 +500,75 @@ function updateProfileUI() {
 
     const firstLetter =
         profile.name
-            ? profile.name
-                .charAt(0)
-                .toUpperCase()
+            ? profile.name.charAt(0).toUpperCase()
             : "Y";
 
-    $("#sidebarAvatar").textContent =
-        firstLetter;
+    const setText = (selector, value) => {
+        const element = $(selector);
+        if (element) {
+            element.textContent = value;
+        }
+    };
 
-    $("#sidebarProfileName").textContent =
-        profile.name || "Your Profile";
+    setText(
+        "#sidebarAvatar",
+        firstLetter
+    );
 
-    $("#sidebarProfileRole").textContent =
-        profile.targetRole ||
-        "No profile selected";
+    setText(
+        "#sidebarProfileName",
+        profile.name || "Your Profile"
+    );
 
-    $("#profileAvatar").textContent =
-        firstLetter;
+    setText(
+        "#sidebarProfileRole",
+        profile.targetRole || "No profile selected"
+    );
 
-    $("#profileName").textContent =
-        profile.name ||
-        "Welcome to SkillBridge";
+    setText(
+        "#profileAvatar",
+        firstLetter
+    );
 
-    $("#profileEducation").textContent =
-        profile.education ||
-        "Education not provided";
+    setText(
+        "#profileName",
+        profile.name || "Welcome to SkillBridge"
+    );
 
-    $("#profileRole").textContent =
-        profile.targetRole || "—";
+    setText(
+        "#profileEducation",
+        profile.education || "Education not provided"
+    );
 
-    $("#profileExperience").textContent =
-        `${profile.experienceYears || 0} years`;
+    setText(
+        "#profileRole",
+        profile.targetRole || "—"
+    );
 
-    $("#metricSkills").textContent =
-        profile.skills.length;
+    setText(
+        "#profileExperience",
+        `${profile.experienceYears || 0} years`
+    );
 
-    $("#metricRole").textContent =
-        profile.targetRole || "—";
+    setText(
+        "#metricSkills",
+        profile.skills.length
+    );
 
-    $("#metricGaps").textContent =
-        state.skillGap?.missing_skills?.length ?? "—";
+    setText(
+        "#metricRole",
+        profile.targetRole || "—"
+    );
 
-    $("#metricJobs").textContent =
-        state.marketAnalysis?.jobs_analyzed ?? "—";
+    setText(
+        "#metricGaps",
+        state.skillGap?.missing_skills?.length ?? "—"
+    );
+
+    setText(
+        "#metricJobs",
+        state.marketAnalysis?.jobs_analyzed ?? "—"
+    );
 
     renderDashboardSkills();
 }
@@ -670,6 +703,9 @@ function renderSkillGap() {
         return;
     }
 
+    const currentSkills =
+        state.profile.skills || [];
+
     const missing =
         data.missing_skills || [];
 
@@ -692,7 +728,7 @@ function renderSkillGap() {
             <div class="metric-card">
                 <div class="metric-top">Current Skills</div>
                 <div class="metric-value">
-                    ${state.profile.skills.length}
+                    ${currentSkills.length}
                 </div>
                 <div class="metric-description">
                     Skills in your profile
@@ -713,10 +749,31 @@ function renderSkillGap() {
 
         <div class="metric-card">
             <div class="eyebrow">
-                SKILL GAP ANALYSIS
+                YOUR CURRENT SKILLS
             </div>
 
-            <h2>Skills to develop</h2>
+            <h2>Skills you already have</h2>
+
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+                ${
+                    currentSkills.length
+                        ? currentSkills
+                            .map(
+                                s =>
+                                    `<span class="skill-pill">${escapeHtml(s)}</span>`
+                            )
+                            .join("")
+                        : `<span class="empty-state">No skills added to your profile yet.</span>`
+                }
+            </div>
+        </div>
+
+        <div class="metric-card">
+            <div class="eyebrow">
+                SKILLS TO DEVELOP
+            </div>
+
+            <h2>Skills you're missing</h2>
 
             <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
                 ${
@@ -809,6 +866,77 @@ function renderResumeResults(data) {
         </div>
 
         <div class="metric-card">
+            <div class="eyebrow">WORK EXPERIENCE</div>
+
+            <h2>Experience detected from your resume</h2>
+
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+                ${
+                    data.experience?.length
+                        ? data.experience.map(
+                            item => {
+                                const title =
+                                    typeof item === "string"
+                                        ? item
+                                        : (
+                                            item.job_title ||
+                                            item.title ||
+                                            "Experience"
+                                        );
+
+                                const company =
+                                    typeof item === "object"
+                                        ? item.company
+                                        : "";
+
+                                const duration =
+                                    typeof item === "object"
+                                        ? item.duration
+                                        : "";
+
+                                return `
+                                    <div class="status-card">
+                                        <div class="status-value">
+                                            ${escapeHtml(title)}
+                                        </div>
+
+                                        ${
+                                            company
+                                                ? `
+                                                    <div style="margin-top:6px;">
+                                                        ${escapeHtml(company)}
+                                                    </div>
+                                                `
+                                                : ""
+                                        }
+
+                                        ${
+                                            duration
+                                                ? `
+                                                    <div
+                                                        style="
+                                                            margin-top:4px;
+                                                            font-size:13px;
+                                                            opacity:0.7;
+                                                        "
+                                                    >
+                                                        ${escapeHtml(duration)}
+                                                    </div>
+                                                `
+                                                : ""
+                                        }
+                                    </div>
+                                `;
+                            }
+                        ).join("")
+                        : `<div class="empty-state">
+                            No specific work experience entries were identified.
+                        </div>`
+                }
+            </div>
+        </div>
+
+        <div class="metric-card">
 
             <div class="eyebrow">
                 EXTRACTED SKILLS
@@ -849,16 +977,22 @@ function renderResumeResults(data) {
 }
 
 function useResumeProfile(data) {
+
+    console.log("USE PROFILE CLICKED", data);
     state.profile = {
         ...state.profile,
 
-        name: data.name || "",
+        name:
+            data.name || "",
 
         education:
             data.education || "",
 
         experienceYears:
             data.experience_years || 0,
+
+        experience:
+            data.experience || [],
 
         skills:
             data.skills || [],
@@ -994,26 +1128,68 @@ function jobInputTemplate() {
         <div class="metric-card">
 
             <div class="eyebrow">
-                JOB DESCRIPTION ANALYSIS
+                CAREER FIT ANALYSIS
             </div>
 
             <h2>
-                Compare your profile with a real opportunity
+                Understand your fit for a role
             </h2>
 
             <p
                 class="metric-description"
-                style="margin-top:8px;"
+                style="margin-top:8px;
+                font-size:15px;"
             >
-                Paste the job description below.
-                Required and preferred skills will
-                be separated automatically.
+                Describe the role you're targeting or paste a
+                specific job description to analyze your skills,
+                gaps, priorities, and preparation path.
             </p>
+
+            <label
+                for="careerGoalInput"
+                style="
+                    display:block;
+                    margin-top:20px;
+                    margin-bottom:10px;
+                    font-weight:600;
+                "
+            >
+                Describe the role you're targeting
+            </label>
+
+            <input
+                id="careerGoalInput"
+                type="text"
+                style="width:100%;box-sizing:border-box;"
+                placeholder="e.g., Python-based web development, AI/ML engineering, or backend development"
+            />
+
+            <div
+                style="
+                    margin:22px 0;
+                    text-align:center;
+                    font-size:12px;
+                    opacity:0.7;
+                "
+            >
+                OR
+            </div>
+
+            <label
+                for="jobDescriptionInput"
+                style="
+                    display:block;
+                    margin-bottom:10px;
+                    font-weight:600;
+                "
+            >
+                Paste a job description
+            </label>
 
             <textarea
                 id="jobDescriptionInput"
                 rows="10"
-                placeholder="Paste the complete job description here..."
+                placeholder="Paste the full job description here..."
             ></textarea>
 
             <div style="margin-top:14px;">
@@ -1021,7 +1197,7 @@ function jobInputTemplate() {
                     class="primary-button"
                     id="analyzeJobButton"
                 >
-                    Analyze Job Description
+                    Analyze Career Fit
                     <span>→</span>
                 </button>
             </div>
@@ -1312,21 +1488,30 @@ function skillPillsHtml(
 }
 
 async function submitJobAnalysis() {
+    const careerGoalInput =
+        $("#careerGoalInput");
+
     const textarea =
         $("#jobDescriptionInput");
 
     const errorBox =
         $("#jobFormError");
 
+    const careerGoal =
+        careerGoalInput?.value.trim() || "";
+
     const jobDescription =
         textarea?.value.trim() || "";
 
-    state.jobDescriptionDraft =
-        jobDescription;
+    const input =
+        jobDescription || careerGoal;
 
-    if (jobDescription.length < 20) {
+    state.jobDescriptionDraft =
+        input;
+
+    if (input.length < 3) {
         errorBox.textContent =
-            "Please paste at least 20 characters of job-description text.";
+            "Please describe the role you're targeting or paste a job description.";
 
         errorBox.classList.remove("hidden");
 
@@ -1356,7 +1541,7 @@ async function submitJobAnalysis() {
                     },
                     body: JSON.stringify({
                         job_description:
-                            jobDescription
+                            input
                     })
                 }
             );
@@ -1380,7 +1565,7 @@ async function submitJobAnalysis() {
         renderInterview();
 
         showToast(
-            "Job description analyzed successfully."
+            "Career fit analyzed successfully."
         );
 
     } catch (error) {

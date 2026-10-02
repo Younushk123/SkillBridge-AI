@@ -95,7 +95,11 @@ async def analyze_resume(file: UploadFile = File(...)):
     except AIConfigurationError as error:
         raise HTTPException(status_code=503, detail="AI analysis is temporarily unavailable") from error
     except (AIProviderError, AIResponseError) as error:
-        raise HTTPException(status_code=502, detail="Unable to analyze this resume") from error
+        print("RESUME ANALYSIS ERROR:", repr(error))
+        raise HTTPException(
+            status_code=502,
+            detail=str(error)
+        ) from error
 
 
 @app.post("/profile",response_model=ProfileResponse)

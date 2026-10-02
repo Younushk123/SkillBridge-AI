@@ -1,10 +1,10 @@
 # SkillBridge AI
 
-## AI-Powered Career Intelligence & Skill Gap Analysis
+## AI-Powered Career Intelligence
 
 SkillBridge AI is an intelligent career development platform that bridges the gap between a candidate's current skills and real-world job requirements.
 
-Instead of providing generic career advice, SkillBridge AI analyzes a user's resume, identifies skill gaps, analyzes current job-market demand, matches the candidate against specific job descriptions, and generates a personalized learning roadmap and interview preparation plan.
+Instead of providing generic career advice, SkillBridge AI analyzes a user's resume, identifies skill gaps, analyzes available job-market demand, matches the candidate against specific job descriptions, and generates a personalized learning roadmap and interview preparation plan.
 
 ---
 
@@ -30,18 +30,18 @@ SkillBridge AI addresses this problem by connecting an individual's skills with 
 SkillBridge AI provides an end-to-end career intelligence workflow:
 
 ```text
-Resume
-   ↓
+Resume / Profile
+       ↓
 Profile & Skill Extraction
-   ↓
+       ↓
 Skill Gap Analysis
-   ↓
+       ↓
 Job-Market Analysis
-   ↓
+       ↓
 Job Description Matching
-   ↓
+       ↓
 Personalized Learning Roadmap
-   ↓
+       ↓
 Interview Preparation
 ```
 
@@ -96,7 +96,7 @@ The system then generates recommendations for the identified gaps.
 
 A key feature of SkillBridge AI is market-aware career analysis.
 
-The platform analyzes recent job descriptions for a target role and identifies the skills currently appearing across those jobs.
+The platform analyzes available job-market data for a target role and identifies skills appearing across relevant job descriptions.
 
 The analysis provides:
 
@@ -127,16 +127,20 @@ The user's existing skills are compared against these market requirements so the
 
 ### 4. Job Description Matching
 
-Users can paste a real job description into SkillBridge AI.
+Users can either:
 
-The system analyzes the description and provides:
+* Describe the role they are targeting, or
+* Paste a specific job description
+
+SkillBridge AI analyzes the input and provides:
 
 * Match score
 * Required skills
 * Preferred skills
 * Matched skills
 * Missing skills
-* Priority skills
+* Learning priorities
+* Job-specific preparation guidance
 
 Example:
 
@@ -178,6 +182,7 @@ Example:
 
 ```text
 Weeks 1–2
+
 Close Required Skill Gaps
 
 Focus:
@@ -186,6 +191,7 @@ JavaScript
 PyTorch
 
 Week 4
+
 Prepare Job Evidence
 
 Focus:
@@ -216,7 +222,7 @@ This connects skill development directly to interview preparation.
 
 ## AI Implementation
 
-SkillBridge AI is designed to integrate Alibaba Cloud DashScope / Qwen for intelligent text analysis.
+SkillBridge AI integrates Alibaba Cloud DashScope / Qwen for intelligent text analysis.
 
 AI capabilities include:
 
@@ -226,9 +232,18 @@ AI capabilities include:
 * Required vs. preferred skill identification
 * Structured career analysis
 
-The application also contains a local intelligence layer for deterministic skill matching, normalization, market analysis, and recommendations.
+The application also contains a local intelligence layer for deterministic:
 
-This hybrid architecture helps maintain useful application behavior even when an external AI service is temporarily unavailable.
+* Skill matching
+* Skill normalization
+* Skill-gap calculations
+* Market analysis
+* Recommendations
+* Career roadmap generation
+
+This hybrid architecture helps maintain useful application behavior when an external AI service is temporarily unavailable.
+
+External job descriptions are treated as untrusted input, and the application validates structured AI responses before using them.
 
 ---
 
@@ -246,23 +261,29 @@ This hybrid architecture helps maintain useful application behavior even when an
 
 * HTML
 * CSS
-* JavaScript (static frontend)
-* Legacy Streamlit frontend retained as `frontend/frontend.py`
+* JavaScript
+* Static frontend architecture
 
 ### AI
 
-* Alibaba Cloud DashScope / Qwen
+* Alibaba Cloud DashScope
+* Qwen
 
 ### Processing
 
 * PyPDF
 * Requests
 * Skill extraction and normalization
+* Job analysis
 * Job-market analysis
 
 ### Server
 
 * Uvicorn
+
+### Deployment
+
+* Render
 
 ---
 
@@ -287,15 +308,16 @@ SkillBridge-AI/
 │
 ├── frontend/
 │   ├── index.html
-│   ├── css/style.css
-│   ├── js/app.js
-│   └── frontend.py (legacy Streamlit UI)
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── app.js
 │
 ├── tests/
 │   ├── __init__.py
+│   ├── test_core.py
 │   ├── test_job_analysis.py
-│   ├── test_market_analysis.py
-│   └── test_resume_analysis.py
+│   └── test_market_pipeline.py
 │
 ├── demo/
 │   ├── error-handling-and-validations/
@@ -310,17 +332,17 @@ SkillBridge-AI/
 
 ## Backend API
 
-| Method | Endpoint                                | Purpose                    |
-| ------ | --------------------------------------- | -------------------------- |
-| GET    | `/`                                     | Check API status           |
-| POST   | `/profile`                              | Create a profile           |
-| GET    | `/profile/{profile_id}`                 | Retrieve a profile         |
-| PUT    | `/profile/{profile_id}`                 | Update a profile           |
-| DELETE | `/profile/{profile_id}`                 | Delete a profile           |
-| GET    | `/profile/{profile_id}/skill-gap`       | Calculate skill gap        |
-| POST   | `/profile/{profile_id}/job-analysis`    | Analyze a job description  |
-| GET    | `/profile/{profile_id}/market-analysis` | Analyze job-market demand  |
-| POST   | `/resume/analyze`                       | Analyze an uploaded resume |
+| Method | Endpoint                                | Purpose                                  |
+| ------ | --------------------------------------- | ---------------------------------------- |
+| GET    | `/`                                     | Check API status                         |
+| POST   | `/profile`                              | Create a profile                         |
+| GET    | `/profile/{profile_id}`                 | Retrieve a profile                       |
+| PUT    | `/profile/{profile_id}`                 | Update a profile                         |
+| DELETE | `/profile/{profile_id}`                 | Delete a profile                         |
+| GET    | `/profile/{profile_id}/skill-gap`       | Calculate skill gap                      |
+| POST   | `/profile/{profile_id}/job-analysis`    | Analyze a career goal or job description |
+| GET    | `/profile/{profile_id}/market-analysis` | Analyze job-market demand                |
+| POST   | `/resume/analyze`                       | Analyze an uploaded resume               |
 
 FastAPI provides interactive API documentation through Swagger UI.
 
@@ -328,7 +350,7 @@ FastAPI provides interactive API documentation through Swagger UI.
 
 ## Database
 
-SQLite is used for persistent profile storage.
+SQLite is used for profile storage in the current application architecture.
 
 SQLAlchemy provides database interaction.
 
@@ -344,7 +366,9 @@ The `Profile` model contains:
 
 The email field is unique to prevent duplicate profiles.
 
-The database file is excluded from Git.
+The local database file is excluded from Git.
+
+For a production-scale deployment, a managed database such as PostgreSQL can be introduced for durable persistence.
 
 ---
 
@@ -360,8 +384,10 @@ Validation includes:
 * Experience range validation
 * Skills validation
 * Target-role validation
+* Resume file type and size validation
+* Job-analysis input validation
 
-The application also handles:
+The application handles common API errors including:
 
 ```text
 404 - Profile not found
@@ -373,19 +399,29 @@ The application also handles:
 
 Database integrity errors are handled using transaction rollback.
 
+The job-analysis pipeline also detects suspicious prompt-injection-style instructions in submitted job descriptions.
+
 ---
 
 ## Testing
 
-The project includes automated tests for the main analytical components. Run them with:
+The project includes automated tests for the main analytical components.
+
+Run the test suite with:
 
 ```bash
 pytest -q
 ```
 
+Current test status:
+
+```text
+8 passed
+```
+
 Testing covers:
 
-* Resume analysis
+* Core application functionality
 * Job-description analysis
 * Market analysis
 * Skill matching
@@ -393,11 +429,15 @@ Testing covers:
 
 The application was also manually tested through:
 
-* Streamlit frontend
+* Static frontend
 * FastAPI Swagger UI
 * Valid inputs
 * Invalid inputs
 * Error-handling scenarios
+* Resume analysis
+* Profile creation and updates
+* Career-goal analysis
+* Job-description analysis
 
 Demonstration and validation evidence is included in the `demo` directory.
 
@@ -452,7 +492,7 @@ uvicorn backend.main:app --reload
 
 ### 6. Start the Frontend
 
-The current frontend is the static HTML/CSS/JavaScript application.
+The current frontend is a static HTML/CSS/JavaScript application.
 
 From the project root, open another terminal:
 
@@ -464,12 +504,6 @@ Then open:
 
 ```text
 http://127.0.0.1:5500
-```
-
-The older Streamlit interface is still retained for reference and can be run with:
-
-```bash
-streamlit run frontend/frontend.py
 ```
 
 ---
@@ -487,12 +521,20 @@ Career Skill Gap
       ↓
 Job-Market Analysis
       ↓
-Job Description Match
+Job Description / Career Goal Analysis
       ↓
 Personalized Roadmap
       ↓
 Interview Preparation
 ```
+
+For Job Analysis, users can either describe a target such as:
+
+```text
+Python backend development
+```
+
+or paste a complete job description.
 
 The `demo` directory contains demonstration videos and validation evidence.
 
@@ -500,7 +542,7 @@ The `demo` directory contains demonstration videos and validation evidence.
 
 ## Impact
 
-SkillBridge AI makes career preparation more personalized, market-driven, and actionable.
+SkillBridge AI makes career preparation more personalized, market-aware, and actionable.
 
 It answers three important questions:
 
@@ -510,7 +552,7 @@ Analyze the candidate's existing skills and career profile.
 
 ### Where does the market need me to be?
 
-Identify skills currently appearing in relevant job descriptions.
+Identify skills appearing in relevant job-market data and job descriptions.
 
 ### What should I do next?
 
@@ -529,7 +571,7 @@ Future versions can include:
 * Learning-resource recommendations
 * Career progress tracking
 * Intelligent candidate-job matching
-* Cloud deployment
+* Managed production database
 * Additional AI model providers
 
 ---
@@ -550,4 +592,12 @@ SkillBridge AI aims to help students and professionals make better career decisi
 
 API keys and other sensitive configuration values must be provided through environment variables.
 
-Never commit credentials, API keys, `.env` files, virtual environments, or local database files to the repository.
+Never commit:
+
+* Credentials
+* API keys
+* `.env` files
+* Virtual environments
+* Local database files
+
+The application also treats externally submitted job descriptions as untrusted content and applies input validation and prompt-injection detection before processing.

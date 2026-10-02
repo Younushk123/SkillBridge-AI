@@ -571,6 +571,19 @@ button {
 
 /* ================= METRICS ================= */
 
+.career-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.career-tool-card {
+    display: flex;
+    flex-direction: column;
+}
+
 .metrics-grid {
     display: grid;
 

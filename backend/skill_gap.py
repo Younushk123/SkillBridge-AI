@@ -46,6 +46,22 @@ ROLE_SKILLS = {
         "Software Development",
     ],
 
+    "AI Developer": [
+        "Python",
+        "APIs",
+        "LLMs",
+        "Prompt Engineering",
+        "RAG"
+    ],
+
+    "Python Developer": [
+        "Python",
+        "SQL",
+        "Git",
+        "APIs",
+        "Object-Oriented Programming"
+    ],
+
     "Web Developer": [
         "HTML",
         "CSS",
@@ -56,6 +72,14 @@ ROLE_SKILLS = {
         "Git",
         "GitHub",
     ],
+
+    "SEO Specialist": [
+    "SEO",
+    "Keyword Research",
+    "Google Analytics",
+    "Google Search Console",
+    "Content Optimization"
+    ],  
 
     "DevOps Engineer": [
         "Linux",

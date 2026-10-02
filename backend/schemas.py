@@ -46,10 +46,14 @@ class StrictSchema(BaseModel):
 
 class ResumeAnalysisResponse(StrictSchema):
     name: str = Field(default="", max_length=100)
-    education: str = Field(default="", max_length=100)
+    education: str = Field(default="", max_length=300)
     experience_years: int = Field(default=0, ge=0, le=50)
-    skills: list[str] = Field(default_factory=list, max_length=50)
-    target_role: str = Field(default="", max_length=100)
+    experience: list[str | dict[str, str]] = Field(
+    default_factory=list,
+    max_length=20
+    )
+    skills: list[str] = Field(default_factory=list, max_length=100)
+    target_role: str = Field(default="", max_length=300)
 
     @model_validator(mode="before")
     @classmethod
@@ -58,15 +62,18 @@ class ResumeAnalysisResponse(StrictSchema):
             return value
 
         normalized = value.copy()
+
         for field, default in {
             "name": "",
             "education": "",
             "experience_years": 0,
+            "experience": [],
             "skills": [],
             "target_role": "",
         }.items():
             if normalized.get(field) is None:
                 normalized[field] = default
+
         return normalized
 
     @field_validator("skills")
@@ -76,17 +83,32 @@ class ResumeAnalysisResponse(StrictSchema):
             raise ValueError("Skills must not be blank")
         return value
 
+    # @field_validator("experience")
+    # @classmethod
+    # def experience_must_not_be_blank(
+    #     cls,
+    #     value: list[str]
+    # ) -> list[str]:
+    #     return [
+    #         item.strip()
+    #         for item in value
+    #         if item and item.strip()
+    #     ]
+
 
 class JobAnalysisRequest(StrictSchema):
-    job_description: str = Field(min_length=20, max_length=30000)
+    job_description: str = Field(min_length=3, max_length=30000)
 
     @field_validator("job_description")
     @classmethod
     def job_description_must_not_be_blank(cls, value: str) -> str:
+        value = value.strip()
+
         if not value:
             raise ValueError("Job description must not be blank")
-        return value
 
+        return value
+    
 class JobInterviewRequest(StrictSchema):
     job_description: str = Field(min_length=20, max_length=30000)
 
