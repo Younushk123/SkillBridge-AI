@@ -268,6 +268,17 @@ ROLE_SKILLS = {
         "Database Administration",
     ],
 
+    "HR Professional": [
+    "Recruitment",
+    "Talent Acquisition",
+    "HR Management",
+    "Employee Relations",
+    "Performance Management",
+    "HR Analytics",
+    "Communication",
+    "Microsoft Excel",
+    ],
+
 }
 
 

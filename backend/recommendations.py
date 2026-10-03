@@ -233,6 +233,16 @@ RECOMMENDATIONS = {
     "Backup and Recovery": "Learn database backup and recovery strategies",
     "Database Security": "Learn database security, access control, and protection",
     "Database Administration": "Learn database administration and practice database maintenance",
+
+    #HR Professional
+    "Recruitment": "Learn recruitment fundamentals, candidate screening, sourcing, and interview coordination.",
+    "Talent Acquisition": "Learn talent sourcing, hiring pipelines, employer branding, and candidate evaluation.",
+    "HR Management": "Learn core HR functions including workforce planning, policies, onboarding, and employee management.",
+    "Employee Relations": "Learn workplace communication, conflict resolution, employee engagement, and HR policies.",
+    "Performance Management": "Learn goal setting, performance reviews, feedback systems, and performance tracking.",
+    "HR Analytics": "Learn how to use HR data and metrics to support workforce and hiring decisions.",
+    "Communication": "Strengthen professional communication, interviewing, negotiation, and stakeholder management.",
+    "Microsoft Excel": "Practice Excel for HR reporting, employee records, analysis, and dashboards.",
 }
 def get_recommendations(missing_skills):
     recommendations = []
